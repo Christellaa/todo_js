@@ -3,21 +3,22 @@
 	<head>
 		<meta charset="utf-8">
 		<title>To-Do List</title>
-		<!-- <link rel="stylesheet" href="style.css"> -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		<!-- <link rel="stylesheet" href="./main.css" /> -->
 		<!-- <script src="script.js"></script> -->
 	</head>
-	<body>
-		<div>
-			<h1>To-Do List 📝</h1>
-			<div>
-				<input type="text" placeholder="Enter a task..." />
-				<button>Add</button>
+	<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+		<div class="bg-white shadow-lg p-8 rounded max-w-md">
+			<h1 class="text-3xl font-bold mb-10 text-center">To-Do List 📝</h1>
+			<div class="flex gap-3 mb-10">
+				<input type="text" placeholder="Enter a task..." class="border rounded px-2 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+				<button class="bg-blue-500 rounded text-white px-4 py-3 hover:bg-blue-600 transition">Add</button>
 			</div>
 			<!-- <ul></ul> list of tasks -->
-		 	<div>
-				<button data-filter="All">All</button>
-				<button data-filter="Active">Active</button>
-				<button data-filter="Completed">Completed</button>
+		 	<div class="flex justify-center gap-14">
+				<button data-filter="all" class="hover:text-blue-800">All</button>
+				<button data-filter="active" class="hover:text-blue-800">Active</button>
+				<button data-filter="completed" class="hover:text-blue-800">Completed</button>
 			</div>
 		</div>
 	</body>
