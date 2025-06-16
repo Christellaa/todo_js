@@ -5,7 +5,9 @@
 		<title>To-Do List</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<!-- <link rel="stylesheet" href="./main.css" /> -->
-		<script src="./js/main.js"></script>
+		<script src="./js/filters.js" defer></script>
+		<script src="./js/tasks.js" defer></script>
+		<script src="./js/main.js" defer></script>
 	</head>
 	<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 		<div class="bg-white shadow-lg p-8 rounded max-w-md">
@@ -14,12 +16,12 @@
 				<input id="task-input" type="text" placeholder="Create a task..." class="border rounded px-2 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
 				<button id="add-task-btn" class="bg-blue-500 rounded text-white px-4 py-3 hover:bg-blue-600 transition">Add</button>
 			</div>
-			<ul id="task-list"></ul>
 		 	<div class="flex justify-center gap-14">
-				<button data-filter="all" class="hover:text-blue-800">All</button>
-				<button data-filter="active" class="hover:text-blue-800">Active</button>
-				<button data-filter="completed" class="hover:text-blue-800">Completed</button>
+				<button data-filter="all" class="hover:text-blue-700">All</button>
+				<button data-filter="active" class="hover:text-blue-700">Active</button>
+				<button data-filter="completed" class="hover:text-blue-700">Completed</button>
 			</div>
+			<ul id="task-list"></ul>
 		</div>
 	</body>
 </html>
