@@ -1,13 +1,14 @@
 let currentFilter = 'all';
-let nextId = 0;
+let nextId = loadNextId();
 
 function initTodo() {
-	const tasks = [];
+	const tasks = loadTasks();
 	changeFilterColor();
+	renderTaskList(tasks);
+	console.log(nextId);
 	filterTasks(tasks);
 	addTask(tasks);
 	taskToggle(tasks);
 }
-
 
 initTodo();

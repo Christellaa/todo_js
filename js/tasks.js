@@ -8,6 +8,8 @@ function addTask(tasks) {
 			tasks.push({text: new_task, completed: false, id: nextId++});
 			renderTaskList(tasks);
 			taskInput.value = '';
+			saveTasks(tasks);
+			saveNextId(nextId);
 		}
 	});
 }
@@ -50,5 +52,6 @@ function taskToggle(tasks) {
 			return;
 		tasks[taskIdx].completed = !tasks[taskIdx].completed;
 		renderTaskList(tasks);
+		saveTasks(tasks);
 	})
 }
