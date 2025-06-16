@@ -9,13 +9,13 @@ function loadTasks() {
 	return [];
 }
 
-function saveNextId(nextId) {
-	localStorage.setItem('nextId', JSON.stringify(nextId));
-}
+// function saveNextId(nextId) {
+// 	localStorage.setItem('nextId', JSON.stringify(nextId));
+// }
 
-function loadNextId() {
-	const saved = localStorage.getItem('nextId');
-	if (saved)
-		return JSON.parse(saved);
-	return 0;
-}
+// function loadNextId() {
+// 	const saved = localStorage.getItem('nextId');
+// 	if (saved)
+// 		return JSON.parse(saved);
+// 	return 0;
+// }

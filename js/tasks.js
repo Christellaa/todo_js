@@ -5,13 +5,25 @@ function addTask(tasks) {
 		const new_task = taskInput.value.trim();
 		if (new_task !== '')
 		{
-			tasks.push({text: new_task, completed: false, id: nextId++});
+			tasks.push({text: new_task, completed: false, id: crypto.randomUUID()});
 			renderTaskList(tasks);
 			taskInput.value = '';
 			saveTasks(tasks);
-			saveNextId(nextId);
+			// saveNextId(nextId);
 		}
 	});
+}
+
+function removeTask(tasks) {
+	const taskList = document.getElementById('task-list');
+	// const removeBtn = document.querySelectorAll('remove-btn');
+	taskList.addEventListener('click', (event) => {
+		const li = event.target.closest('li');
+		const btn = event.target.closest('button');
+		// console.log(li);
+		// console.log(btn);
+	})
+	// when clicking on trashcan -> .remove on the div of the task
 }
 
 function renderTaskList(tasks)
@@ -33,24 +45,41 @@ function shouldDisplayTask(task)
 	return true;
 }
 
-function createTaskElement(task, idx)
+function createTaskElement(task)
 {
 	const li = document.createElement('li');
-	li.textContent = task.text;
-	li.className = 'p-2 bg-white border-b';
-	if (task.completed)
-		li.classList.add('line-through');
+	li.className = 'flex justify-between border-b bg-white p-2';
 	li.dataset.idx = task.id;
+
+	const span = document.createElement('span');
+	span.textContent = task.text;
+	if (task.completed)
+		span.classList.add('line-through');
+
+	const button = document.createElement('button');
+	button.className = 'bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center';
+
+	const img = document.createElement('img');
+	img.src='assets/trash-solid.svg';
+	img.alt='Delete task';
+	img.width='15';
+
+	li.appendChild(span);
+	button.appendChild(img);
+	li.appendChild(button);
 	return li;
 }
 
 function taskToggle(tasks) {
 	const taskList = document.getElementById('task-list');
 	taskList.addEventListener('click', (event) => {
-		const taskIdx = event.target.dataset.idx;
+		const taskIdx = event.target.closest('[data-idx]').dataset.idx;
+		const task = tasks.find(t => t.id === taskIdx);
+		console.log(event.target); // donne le span
+		console.log(task); // donne la tache de tasks[]
 		if (taskIdx === undefined)
 			return;
-		tasks[taskIdx].completed = !tasks[taskIdx].completed;
+		task.completed = !task.completed;
 		renderTaskList(tasks);
 		saveTasks(tasks);
 	})

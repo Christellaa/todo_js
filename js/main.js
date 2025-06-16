@@ -1,14 +1,17 @@
 let currentFilter = 'all';
-let nextId = loadNextId();
+// let nextId = loadNextId();
 
 function initTodo() {
 	const tasks = loadTasks();
 	changeFilterColor();
 	renderTaskList(tasks);
-	console.log(nextId);
 	filterTasks(tasks);
 	addTask(tasks);
+	removeTask(tasks);
 	taskToggle(tasks);
 }
 
 initTodo();
+
+// localStorage.removeItem('tasks');
+// localStorage.removeItem('tasks');
