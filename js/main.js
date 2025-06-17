@@ -7,6 +7,7 @@ function initTodo() {
 	filterTasks(tasks);
 	addTask(tasks);
 	removeTask(tasks);
+	modifyTask(tasks);
 	taskToggle(tasks);
 }
 
