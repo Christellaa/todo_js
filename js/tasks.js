@@ -9,21 +9,23 @@ function addTask(tasks) {
 			renderTaskList(tasks);
 			taskInput.value = '';
 			saveTasks(tasks);
-			// saveNextId(nextId);
 		}
 	});
 }
 
 function removeTask(tasks) {
 	const taskList = document.getElementById('task-list');
-	// const removeBtn = document.querySelectorAll('remove-btn');
 	taskList.addEventListener('click', (event) => {
-		const li = event.target.closest('li');
-		const btn = event.target.closest('button');
-		// console.log(li);
-		// console.log(btn);
+		if (event.target.tagName === 'BUTTON' || event.target.tagName === 'IMG')
+		{
+			const li = event.target.closest('li');
+			const taskIdx = tasks.findIndex(t => t.id === li.dataset.idx);
+			if (taskIdx > -1)
+					tasks.splice(taskIdx, 1);
+			renderTaskList(tasks);
+			saveTasks(tasks);
+		}
 	})
-	// when clicking on trashcan -> .remove on the div of the task
 }
 
 function renderTaskList(tasks)
@@ -73,14 +75,15 @@ function createTaskElement(task)
 function taskToggle(tasks) {
 	const taskList = document.getElementById('task-list');
 	taskList.addEventListener('click', (event) => {
-		const taskIdx = event.target.closest('[data-idx]').dataset.idx;
-		const task = tasks.find(t => t.id === taskIdx);
-		console.log(event.target); // donne le span
-		console.log(task); // donne la tache de tasks[]
-		if (taskIdx === undefined)
-			return;
-		task.completed = !task.completed;
-		renderTaskList(tasks);
-		saveTasks(tasks);
+		if (event.target.tagName === 'SPAN')
+		{
+			const taskIdx = event.target.closest('[data-idx]').dataset.idx;
+			const task = tasks.find(t => t.id === taskIdx);
+			if (taskIdx === undefined)
+				return;
+			task.completed = !task.completed;
+			renderTaskList(tasks);
+			saveTasks(tasks);
+		}
 	})
 }

@@ -1,5 +1,4 @@
 let currentFilter = 'all';
-// let nextId = loadNextId();
 
 function initTodo() {
 	const tasks = loadTasks();
@@ -12,6 +11,3 @@ function initTodo() {
 }
 
 initTodo();
-
-// localStorage.removeItem('tasks');
-// localStorage.removeItem('tasks');

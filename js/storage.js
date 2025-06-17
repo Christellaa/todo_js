@@ -8,14 +8,3 @@ function loadTasks() {
 		return JSON.parse(saved);
 	return [];
 }
-
-// function saveNextId(nextId) {
-// 	localStorage.setItem('nextId', JSON.stringify(nextId));
-// }
-
-// function loadNextId() {
-// 	const saved = localStorage.getItem('nextId');
-// 	if (saved)
-// 		return JSON.parse(saved);
-// 	return 0;
-// }
