@@ -3,18 +3,27 @@ function renderTaskList(tasks)
 	changeFilterColor();
 	const taskList = document.getElementById('task-list');
 	taskList.innerHTML = '';
-	const filteredList = tasks.filter((task) => shouldDisplayTask(task));
+	const filters = {
+		completed: task => task.completed,
+		active: task => !task.completed,
+		all: () => true
+	}
+	const filteredList = tasks.filter(filters[currentFilter]);
 	filteredList.forEach((task) => {
 		const li = createTaskElement(task);
 		taskList.appendChild(li);
 	})
 }
 
-function shouldDisplayTask(task)
+function changeFilterColor()
 {
-	if (currentFilter === 'completed') return task.completed;
-	if (currentFilter === 'active') return !task.completed;
-	return true;
+	const filterBtns = document.querySelectorAll(`button[data-filter]`);
+	filterBtns.forEach((btn) => {
+		if (btn.dataset.filter === currentFilter)
+			btn.classList.add('text-violet-700');
+		else
+			btn.classList.remove('text-violet-700');
+	})
 }
 
 function createTaskElement(task)
@@ -34,10 +43,11 @@ function createTaskElement(task)
 	const button = document.createElement('button');
 	button.className = 'bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center';
 
-	const img = document.createElement('img');
-	img.src='assets/trash-solid.svg';
-	img.alt='Delete task';
-	img.width='15';
+	const img = Object.assign(document.createElement('img'), {
+		src: 'assets/trash-solid.svg',
+		alt: 'Delete task',
+		width: 15
+	});
 
 	li.appendChild(checkbox);
 	li.appendChild(span);
@@ -46,18 +56,3 @@ function createTaskElement(task)
 	return li;
 }
 
-function taskToggle(tasks) {
-	const taskList = document.getElementById('task-list');
-	taskList.addEventListener('click', (event) => {
-		if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox')
-		{
-			const taskIdx = event.target.closest('[data-idx]').dataset.idx;
-			const task = tasks.find(t => t.id === taskIdx);
-			if (taskIdx === undefined)
-				return;
-			task.completed = !task.completed;
-			renderTaskList(tasks);
-			saveTasks(tasks);
-		}
-	})
-}

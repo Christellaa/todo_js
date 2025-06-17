@@ -1,14 +1,24 @@
 let currentFilter = 'all';
 
-function initTodo() {
+function launchTodo() {
 	const tasks = loadTasks();
-	changeFilterColor();
 	renderTaskList(tasks);
-	filterTasks(tasks);
-	addTask(tasks);
-	removeTask(tasks);
-	modifyTask(tasks);
-	taskToggle(tasks);
+	taskHandlers(tasks);
 }
 
-initTodo();
+launchTodo();
+
+/**
+ * EASY:
+ * button clear all completed tasks
+ * reorder tasks with drag and drop (dragstart, dragover, drop => events)
+ * MEDIUM:
+ * progressor indicator that show 'numberDone/numberMax completed'
+ * search bar to search task by text
+ * undo last action: by having a history stack of user actions to allow undo
+ * HARD:
+ * add tests with jest
+ * sync with cloud (with api or firebase): to save tasks to it instead of localstorage
+ * multi-list: differents lists => work, groceries...
+ * user accounts & authentication (need backend): login/register, sync tasks per user
+ */
