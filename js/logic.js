@@ -1,5 +1,5 @@
 function taskHandlers(tasks) {
-	filterTasks(tasks);
+	switchFilter(tasks);
 	const newTaskInput = document.getElementById('task-input');
 	const newTaskBtn = document.getElementById('add-task-btn');
 	const taskList = document.getElementById('task-list');
@@ -8,12 +8,12 @@ function taskHandlers(tasks) {
 	newTaskInput.addEventListener('keydown', (e) => e.key === 'Enter' && addNewTask(tasks, newTaskInput));
 	newTaskBtn.addEventListener('click',() => addNewTask(tasks, newTaskInput));
 
-	taskList.addEventListener('click', (event) => handleEvent(event.target, tasks));
+	taskList.addEventListener('click', (event) => modifyTask(event.target, tasks));
 
 	removeCompleted.addEventListener('click', () => removeCompletedTasks(tasks));
 }
 
-function filterTasks(tasks) {
+function switchFilter(tasks) {
 	const filterBtns = document.querySelectorAll('button[data-filter]')
 	filterBtns.forEach((btn) => {
 		btn.addEventListener('click', () => {
@@ -23,7 +23,7 @@ function filterTasks(tasks) {
 	})
 }
 
-function handleEvent(span, tasks) {
+function modifyTask(span, tasks) {
 	const li = span.closest('li');
 	const task = tasks.find(t => t.id === li.dataset.idx);
 	const taskIdx = tasks.findIndex(t => t.id === li.dataset.idx);
