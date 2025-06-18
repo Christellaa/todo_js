@@ -1,7 +1,15 @@
+function updateProgressBar(percentage)
+{
+	const text = document.querySelector('.progress-bar-text');
+	const width = document.querySelector('.progress-bar-width');
+	text.textContent = `${percentage}%`;
+	width.style.width = `${percentage}%`;
+}
+
 function renderTaskList(tasks)
 {
 	changeFilterColor();
-
+	handleProgressBar(tasks);
 	const taskList = document.getElementById('task-list');
 	taskList.innerHTML = '';
 	const filteredList = filterList(tasks);

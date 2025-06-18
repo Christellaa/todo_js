@@ -1,3 +1,9 @@
+function handleProgressBar(tasks) {
+	const completedTasks = tasks.filter(task => task.completed);
+	const percentage = Math.round((completedTasks.length / tasks.length) * 100);
+	updateProgressBar(percentage);
+}
+
 function taskHandlers(tasks) {
 	switchFilter(tasks);
 	const newTaskInput = document.getElementById('task-input');
@@ -51,9 +57,9 @@ function modifyTask(target, tasks) {
 }
 
 function removeCompletedTasks(tasks) {
-	const filteredList = tasks.filter(task => !task.completed);
+	const activeTasks = tasks.filter(task => !task.completed);
 	tasks.length = 0;
-	tasks.push(...filteredList);
+	tasks.push(...activeTasks);
 	update(tasks);
 }
 
