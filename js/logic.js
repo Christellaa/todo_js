@@ -81,8 +81,7 @@ function enableEditingTask(span) {
 function disableEditingTask(input, tasks, taskIdx, initialText) {
 	const newText = input.value.trim();
 	if (newText !== '' && input.value !== initialText)
-	{// rename filterList et filterTasks (logic.js et ui.js)
-
+	{
 		tasks[taskIdx].text = newText;
 		tasks[taskIdx].completed = false;
 	}
