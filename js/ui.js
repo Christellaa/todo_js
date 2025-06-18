@@ -57,7 +57,7 @@ function createTaskElement(task)
 	div.className = 'flex ml-3 gap-3';
 
 	const button = document.createElement('button');
-	button.className = 'bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center flex-shrink-0';
+	button.className = 'delete-btn bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center flex-shrink-0';
 
 	const deleteImg = Object.assign(document.createElement('img'), {
 		src: 'assets/trash-solid.svg',
@@ -68,6 +68,8 @@ function createTaskElement(task)
 	const dragDropImg = Object.assign(document.createElement('img'), {
 		src: 'assets/grip-lines-solid.svg',
 		alt: 'Drag and drop task',
+		className: 'drapDropImg cursor-grab',
+		draggable: true,
 		width: 15
 	});
 

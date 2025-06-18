@@ -10,6 +10,8 @@ function taskHandlers(tasks) {
 
 	taskList.addEventListener('click', (event) => modifyTask(event.target, tasks));
 
+	handleDragAndDrop(tasks, taskList);
+
 	removeCompleted.addEventListener('click', () => removeCompletedTasks(tasks));
 }
 
@@ -23,23 +25,25 @@ function switchFilter(tasks) {
 	})
 }
 
-function modifyTask(span, tasks) {
-	const li = span.closest('li');
+function modifyTask(target, tasks) {
+	const li = target.closest('li');
+	if (!li)
+		return;
 	const task = tasks.find(t => t.id === li.dataset.idx);
 	const taskIdx = tasks.findIndex(t => t.id === li.dataset.idx);
 
-	if (span.tagName === 'BUTTON' || span.tagName === 'IMG')
+	if (target.closest('.delete-btn'))
 	{
 		tasks.splice(taskIdx, 1);
 		update(tasks);
 	}
-	else if (span.tagName === 'SPAN')
+	else if (target.tagName === 'SPAN')
 	{
-		const input = enableEditingTask(span);
-		input.addEventListener('blur', () => disableEditingTask(input, tasks, taskIdx, span.textContent));
-		input.addEventListener('keydown', (e) => e.key === 'Enter' && disableEditingTask(input, tasks, taskIdx, span.textContent));
+		const input = enableEditingTask(target);
+		input.addEventListener('blur', () => disableEditingTask(input, tasks, taskIdx, target.textContent));
+		input.addEventListener('keydown', (e) => e.key === 'Enter' && disableEditingTask(input, tasks, taskIdx, target.textContent));
 	}
-	else if (span.tagName === 'INPUT' && span.type === 'checkbox')
+	else if (target.tagName === 'INPUT' && target.type === 'checkbox')
 	{
 		task.completed = !task.completed;
 		update(tasks);

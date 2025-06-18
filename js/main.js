@@ -1,7 +1,7 @@
 let currentFilter = 'all';
 
 function launchTodo() {
-	let tasks = loadTasks();
+	const tasks = loadTasks();
 
 	renderTaskList(tasks);
 	taskHandlers(tasks);
@@ -10,8 +10,6 @@ function launchTodo() {
 launchTodo();
 
 /**
- * EASY:
- * reorder tasks with drag and drop (dragstart, dragover, drop => events)
  * MEDIUM:
  * progressor indicator that show 'numberDone/numberMax completed'
  * search bar to search task by text
