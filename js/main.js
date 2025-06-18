@@ -1,7 +1,8 @@
 let currentFilter = 'all';
 
 function launchTodo() {
-	const tasks = loadTasks();
+	let tasks = loadTasks();
+
 	renderTaskList(tasks);
 	taskHandlers(tasks);
 }
@@ -10,7 +11,6 @@ launchTodo();
 
 /**
  * EASY:
- * button clear all completed tasks
  * reorder tasks with drag and drop (dragstart, dragover, drop => events)
  * MEDIUM:
  * progressor indicator that show 'numberDone/numberMax completed'
@@ -22,3 +22,6 @@ launchTodo();
  * multi-list: differents lists => work, groceries...
  * user accounts & authentication (need backend): login/register, sync tasks per user
  */
+
+// rename filterList et filterTasks (logic.js et ui.js)
+// rename handleEvent (logic.js)

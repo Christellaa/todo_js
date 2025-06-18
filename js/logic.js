@@ -3,16 +3,14 @@ function taskHandlers(tasks) {
 	const newTaskInput = document.getElementById('task-input');
 	const newTaskBtn = document.getElementById('add-task-btn');
 	const taskList = document.getElementById('task-list');
+	const removeCompleted = document.getElementById('remove-completed');
 
 	newTaskInput.addEventListener('keydown', (e) => e.key === 'Enter' && addNewTask(tasks, newTaskInput));
 	newTaskBtn.addEventListener('click',() => addNewTask(tasks, newTaskInput));
 
-	taskList.addEventListener('click', (event) => {
-		const li = event.target.closest('li');
-		const task = tasks.find(t => t.id === li.dataset.idx);
-		const taskIdx = tasks.findIndex(t => t.id === li.dataset.idx);
-		handleEvent(event.target, tasks, task, taskIdx);
-	})
+	taskList.addEventListener('click', (event) => handleEvent(event.target, tasks));
+
+	removeCompleted.addEventListener('click', () => removeCompletedTasks(tasks));
 }
 
 function filterTasks(tasks) {
@@ -25,7 +23,11 @@ function filterTasks(tasks) {
 	})
 }
 
-function handleEvent(span, tasks, task, taskIdx) {
+function handleEvent(span, tasks) {
+	const li = span.closest('li');
+	const task = tasks.find(t => t.id === li.dataset.idx);
+	const taskIdx = tasks.findIndex(t => t.id === li.dataset.idx);
+
 	if (span.tagName === 'BUTTON' || span.tagName === 'IMG')
 	{
 		tasks.splice(taskIdx, 1);
@@ -42,6 +44,13 @@ function handleEvent(span, tasks, task, taskIdx) {
 		task.completed = !task.completed;
 		update(tasks);
 	}
+}
+
+function removeCompletedTasks(tasks) {
+	const filteredList = tasks.filter(task => !task.completed);
+	tasks.length = 0;
+	tasks.push(...filteredList);
+	update(tasks);
 }
 
 function update(tasks) {
