@@ -53,19 +53,30 @@ function createTaskElement(task)
 	span.textContent = task.text;
 	span.className = 'break-words overflow-hidden';
 
-	const button = document.createElement('button');
-	button.className = 'bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center flex-shrink-0 ml-0.2';
+	const div = document.createElement('div');
+	div.className = 'flex ml-3 gap-3';
 
-	const img = Object.assign(document.createElement('img'), {
+	const button = document.createElement('button');
+	button.className = 'bg-red-300 hover:bg-red-600 rounded-full w-8 h-8 flex justify-center flex-shrink-0';
+
+	const deleteImg = Object.assign(document.createElement('img'), {
 		src: 'assets/trash-solid.svg',
 		alt: 'Delete task',
 		width: 15
 	});
 
+	const dragDropImg = Object.assign(document.createElement('img'), {
+		src: 'assets/grip-lines-solid.svg',
+		alt: 'Drag and drop task',
+		width: 15
+	});
+
 	li.appendChild(checkbox);
 	li.appendChild(span);
-	button.appendChild(img);
-	li.appendChild(button);
+	button.appendChild(deleteImg);
+	div.appendChild(button);
+	div.appendChild(dragDropImg);
+	li.appendChild(div);
 	return li;
 }
 
