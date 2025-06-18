@@ -21,7 +21,6 @@ function dragStartTask(event) {
 	if (!li)
 		return;
 	event.dataTransfer.setData('text/plain', li.dataset.idx);
-	console.log('start');
 }
 
 function dragOverTask(event) {
@@ -33,7 +32,6 @@ function dragOverTask(event) {
 		lastHoveredTask.classList.remove('drag-over', 'bg-gray-200');
 	li.classList.add('drag-over', 'bg-gray-200');
 	lastHoveredTask = li;
-	console.log('over');
 }
 
 function dragLeaveTask(event) {
@@ -41,7 +39,6 @@ function dragLeaveTask(event) {
 	if (!li)
 		return;
 	li.classList.remove('drag-over', 'bg-gray-200');
-	console.log('leave');
 }
 
 function dropTask(event, tasks) {
@@ -60,7 +57,6 @@ function dropTask(event, tasks) {
 	if (taskIdxFrom === -1 || taskIdxTo === -1 || taskIdxFrom === taskIdxTo)
 		return;
 	swapTasks(taskIdxFrom, taskIdxTo, tasks);
-	console.log('drop');
 	update(tasks);
 }
 
