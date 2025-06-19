@@ -6,6 +6,27 @@ function updateProgressBar(percentage)
 	width.style.width = `${percentage}%`;
 }
 
+function showSearchMsg(taskList)
+{
+	const searchForm = document.querySelector('.search-form');
+
+	const oldSpan = searchForm.querySelector('span');
+	if (oldSpan)
+		searchForm.removeChild(oldSpan);
+	if (!taskList)
+		return;
+
+	const span = document.createElement('span');
+	span.className = 'text-gray-600';
+
+	if (taskList.length == 0)
+		span.textContent = 'No task found';
+	else
+		span.textContent = `${taskList.length} task${taskList.length > 1 ? 's' : ''} found`;
+
+	searchForm.appendChild(span);
+}
+
 function renderTaskList(tasks)
 {
 	changeFilterColor();
@@ -22,6 +43,11 @@ function renderTaskList(tasks)
 		document.getElementById('remove-completed').classList.remove('hidden');
 	else
 		document.getElementById('remove-completed').classList.add('hidden');
+
+	const taskLi = document.querySelectorAll('li');
+	const searchBar = document.getElementById('search');
+	const input = normalizeText(searchBar.value);
+	applySearchFilter(taskLi, input);
 }
 
 function filterList(tasks) {

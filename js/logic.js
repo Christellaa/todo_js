@@ -11,7 +11,7 @@ function taskHandlers(tasks) {
 	const taskList = document.getElementById('task-list');
 	const removeCompleted = document.getElementById('remove-completed');
 
-	newTaskInput.addEventListener('keydown', (e) => e.key === 'Enter' && addNewTask(tasks, newTaskInput));
+	newTaskInput.addEventListener('keydown', (event) => event.key === 'Enter' && addNewTask(tasks, newTaskInput));
 	newTaskBtn.addEventListener('click',() => addNewTask(tasks, newTaskInput));
 
 	taskList.addEventListener('click', (event) => modifyTask(event.target, tasks));
@@ -47,7 +47,7 @@ function modifyTask(target, tasks) {
 	{
 		const input = enableEditingTask(target);
 		input.addEventListener('blur', () => disableEditingTask(input, tasks, taskIdx, target.textContent));
-		input.addEventListener('keydown', (e) => e.key === 'Enter' && disableEditingTask(input, tasks, taskIdx, target.textContent));
+		input.addEventListener('keydown', (event) => event.key === 'Enter' && disableEditingTask(input, tasks, taskIdx, target.textContent));
 	}
 	else if (target.tagName === 'INPUT' && target.type === 'checkbox')
 	{

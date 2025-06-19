@@ -5,14 +5,13 @@ function launchTodo() {
 
 	renderTaskList(tasks);
 	taskHandlers(tasks);
+	handleSearch();
 }
 
 launchTodo();
 
 /**
  * MEDIUM:
- * progressor indicator that show 'numberDone/numberMax completed'
- * search bar to search task by text
  * undo last action: by having a history stack of user actions to allow undo
  * HARD:
  * add tests with jest
@@ -20,4 +19,3 @@ launchTodo();
  * multi-list: differents lists => work, groceries...
  * user accounts & authentication (need backend): login/register, sync tasks per user
  */
-
