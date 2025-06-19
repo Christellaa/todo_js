@@ -57,6 +57,7 @@ function dropTask(event, tasks) {
 	if (taskIdxFrom === -1 || taskIdxTo === -1 || taskIdxFrom === taskIdxTo)
 		return;
 	swapTasks(taskIdxFrom, taskIdxTo, tasks);
+	saveAction('move', null, null, null, taskIdxTo, taskIdxFrom);
 	update(tasks);
 }
 

@@ -8,3 +8,14 @@ function loadTasks() {
 		return JSON.parse(saved);
 	return [];
 }
+
+function saveHistory() {
+	localStorage.setItem('history', JSON.stringify(history));
+}
+
+function loadHistory() {
+	const saved = localStorage.getItem('history');
+	if (saved)
+		return JSON.parse(saved);
+	return [];
+}

@@ -40,6 +40,7 @@ function modifyTask(target, tasks) {
 
 	if (target.closest('.delete-btn'))
 	{
+		saveAction('delete', task.id, task.text, task.completed, taskIdx, null);
 		tasks.splice(taskIdx, 1);
 		update(tasks);
 	}
@@ -51,6 +52,7 @@ function modifyTask(target, tasks) {
 	}
 	else if (target.tagName === 'INPUT' && target.type === 'checkbox')
 	{
+		saveAction('complete', null, null, task.completed, taskIdx, null);
 		task.completed = !task.completed;
 		update(tasks);
 	}
@@ -69,10 +71,16 @@ function update(tasks) {
 }
 
 function addNewTask(tasks, newTaskInput) {
-	const new_task = newTaskInput.value.trim();
-	if (new_task !== '')
+	const newTaskText = newTaskInput.value.trim();
+	if (newTaskText !== '')
 	{
-		tasks.push({id: crypto.randomUUID(), text: new_task, completed: false});
+		const newTask = {
+			id: crypto.randomUUID(),
+			text: newTaskText,
+			completed: false
+		};
+		tasks.push(newTask);
+		saveAction('add', null, null, null, tasks.length - 1, null);
 		update(tasks);
 		newTaskInput.value = '';
 	}
@@ -92,6 +100,7 @@ function disableEditingTask(input, tasks, taskIdx, initialText) {
 	const newText = input.value.trim();
 	if (newText !== '' && input.value !== initialText)
 	{
+		saveAction('change', null, initialText, tasks[taskIdx].completed, taskIdx, null);
 		tasks[taskIdx].text = newText;
 		tasks[taskIdx].completed = false;
 	}
