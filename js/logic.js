@@ -59,10 +59,13 @@ function modifyTask(target, tasks) {
 }
 
 function removeCompletedTasks(tasks) {
-	const activeTasks = tasks.filter(task => !task.completed);
-	tasks.length = 0;
-	tasks.push(...activeTasks);
-	update(tasks);
+	if (window.confirm('Are you sure? It will be definitive'))
+	{
+		const activeTasks = tasks.filter(task => !task.completed);
+		tasks.length = 0;
+		tasks.push(...activeTasks);
+		update(tasks);
+	}
 }
 
 function update(tasks) {

@@ -60,7 +60,8 @@ function changeAction(tasks, action) {
 
 function completeAction(tasks, action) {
 	const task = tasks[action.idx];
-	task.completed = action.completed;
+	if (task)
+		task.completed = action.completed;
 }
 
 function moveAction(tasks, action) {
