@@ -1,4 +1,12 @@
-let currentFilter = 'all';
+import { loadTasks } from './storage.js';
+import { renderTaskList } from './ui.js';
+import { taskHandlers } from './logic.js';
+import { handleSearch } from './search.js';
+import { handleUndo } from './history.js';
+
+export const filterState = {
+	currentFilter: 'all'
+};
 
 function launchTodo() {
 	const tasks = loadTasks();
@@ -18,5 +26,3 @@ launchTodo();
  * multi-list: differents lists => work, groceries...
  * user accounts & authentication (need backend): login/register, sync tasks per user
  */
-
-// window 'Are you sure? It will be definitive' when clicking on remove all completed btn

@@ -1,4 +1,8 @@
-function updateProgressBar(percentage)
+import { filterState } from './main.js';
+import { handleProgressBar } from './logic.js';
+import { normalizeText, applySearchFilter } from './search.js';
+
+export function updateProgressBar(percentage)
 {
 	const text = document.querySelector('.progress-bar-text');
 	const width = document.querySelector('.progress-bar-width');
@@ -6,7 +10,7 @@ function updateProgressBar(percentage)
 	width.style.width = `${percentage}%`;
 }
 
-function showSearchMsg(taskList)
+export function showSearchMsg(taskList)
 {
 	const searchForm = document.querySelector('.search-form');
 
@@ -27,7 +31,7 @@ function showSearchMsg(taskList)
 	searchForm.appendChild(span);
 }
 
-function renderTaskList(tasks)
+export function renderTaskList(tasks)
 {
 	changeFilterColor();
 	handleProgressBar(tasks);
@@ -39,7 +43,7 @@ function renderTaskList(tasks)
 		taskList.appendChild(li);
 	})
 
-	if (currentFilter === 'completed' && filteredList.length > 0)
+	if (filterState.currentFilter === 'completed' && filteredList.length > 0)
 		document.getElementById('remove-completed').classList.remove('hidden');
 	else
 		document.getElementById('remove-completed').classList.add('hidden');
@@ -56,7 +60,7 @@ function filterList(tasks) {
 	active: task => !task.completed,
 	all: () => true
 	}
-	return tasks.filter(filters[currentFilter]);
+	return tasks.filter(filters[filterState.currentFilter]);
 }
 
 
@@ -64,7 +68,7 @@ function changeFilterColor()
 {
 	const filterBtns = document.querySelectorAll(`button[data-filter]`);
 	filterBtns.forEach((btn) => {
-		if (btn.dataset.filter === currentFilter)
+		if (btn.dataset.filter === filterState.currentFilter)
 			btn.classList.add('text-violet-700');
 		else
 			btn.classList.remove('text-violet-700');

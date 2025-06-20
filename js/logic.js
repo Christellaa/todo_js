@@ -1,10 +1,16 @@
-function handleProgressBar(tasks) {
+import { filterState } from './main.js';
+import { updateProgressBar, renderTaskList } from './ui.js';
+import { saveAction } from './history.js';
+import { handleDragAndDrop } from './dragAndDrop.js';
+import { saveTasks } from './storage.js';
+
+export function handleProgressBar(tasks) {
 	const completedTasks = tasks.filter(task => task.completed);
 	const percentage = Math.round((completedTasks.length / tasks.length) * 100);
 	updateProgressBar(percentage);
 }
 
-function taskHandlers(tasks) {
+export function taskHandlers(tasks) {
 	switchFilter(tasks);
 	const newTaskInput = document.getElementById('task-input');
 	const newTaskBtn = document.getElementById('add-task-btn');
@@ -25,7 +31,7 @@ function switchFilter(tasks) {
 	const filterBtns = document.querySelectorAll('button[data-filter]')
 	filterBtns.forEach((btn) => {
 		btn.addEventListener('click', () => {
-			currentFilter = btn.dataset.filter;
+			filterState.currentFilter = btn.dataset.filter;
 			renderTaskList(tasks, btn.dataset.filter);
 		})
 	})
@@ -78,7 +84,7 @@ function removeCompletedTasks(tasks) {
 	})
 }
 
-function update(tasks) {
+export function update(tasks) {
 	renderTaskList(tasks);
 	saveTasks(tasks);
 }

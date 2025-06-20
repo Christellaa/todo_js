@@ -1,6 +1,9 @@
+import { saveAction } from './history.js';
+import { update } from './logic.js';
+
 let lastHoveredTask = null;
 
-function handleDragAndDrop(tasks, taskList) {
+export function handleDragAndDrop(tasks, taskList) {
 	document.body.addEventListener('dragover', (e) => e.preventDefault());
 	taskList.addEventListener('dragstart', dragStartTask);
 	taskList.addEventListener('dragover', dragOverTask);

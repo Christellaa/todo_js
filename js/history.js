@@ -1,14 +1,17 @@
+import { saveHistory, loadHistory } from './storage.js';
+import { update } from './logic.js';
+
 const history = loadHistory();
 
-function saveAction(type, id, text, completed, idx, oldIdx) {
+export function saveAction(type, id, text, completed, idx, oldIdx) {
 	const action = {type: type, id: id, text: text, completed: completed, idx: idx, oldIdx: oldIdx};
 	if (history.length > 4)
 		history.shift();
 	history.push(action);
-	saveHistory();
+	saveHistory(history);
 }
 
-function handleUndo(tasks) {
+export function handleUndo(tasks) {
 	const undoBtn = document.querySelector('.undo-action');
 	undoBtn.addEventListener('click', () => undoAction(tasks));
 }
@@ -36,7 +39,7 @@ function undoAction(tasks) {
 			break;
 	}
 	update(tasks);
-	saveHistory();
+	saveHistory(history);
 }
 
 function deleteAction(tasks, action) {
@@ -65,10 +68,10 @@ function completeAction(tasks, action) {
 }
 
 function moveAction(tasks, action) {
-	newIdx = action.idx;
-	oldIdx = action.oldIdx;
+	const newIdx = action.idx;
+	const oldIdx = action.oldIdx;
 
-	tmp = tasks[newIdx];
+	const tmp = tasks[newIdx];
 	tasks.splice(newIdx, 1);
 	tasks.splice(oldIdx, 0, tmp);
 }

@@ -1,4 +1,6 @@
-function handleSearch() {
+import { showSearchMsg } from './ui.js';
+
+export function handleSearch() {
 	const searchForm = document.querySelector('.search-form');
 	searchForm.addEventListener('submit', (event) => {
 		event.preventDefault();
@@ -22,10 +24,10 @@ function handleSearch() {
 	})
 }
 
-function applySearchFilter(taskLi, input)
+export function applySearchFilter(taskLi, input)
 {
 	taskLi.forEach((task) => {
-		taskText = normalizeText(task.textContent);
+		const taskText = normalizeText(task.textContent);
 		if (taskText.includes(input))
 			task.classList.remove('hidden');
 		else
@@ -40,7 +42,7 @@ function applySearchFilter(taskLi, input)
 	}
 }
 
-function normalizeText(text) {
+export function normalizeText(text) {
 	return text
 	.toLowerCase()
 	.normalize('NFD')
