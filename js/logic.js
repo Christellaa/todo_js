@@ -59,13 +59,23 @@ function modifyTask(target, tasks) {
 }
 
 function removeCompletedTasks(tasks) {
-	if (window.confirm('Are you sure? It will be definitive'))
-	{
-		const activeTasks = tasks.filter(task => !task.completed);
-		tasks.length = 0;
-		tasks.push(...activeTasks);
-		update(tasks);
-	}
+	const popup = document.getElementById('popup-remove-completed');
+	popup.classList.remove('hidden');
+	popup.addEventListener('click', (event) => {
+		if (event.target.id === 'popup-cancel')
+		{
+			popup.classList.add('hidden');
+			return;
+		}
+		else if (event.target.id === 'popup-confirm')
+		{
+			const activeTasks = tasks.filter(task => !task.completed);
+			tasks.length = 0;
+			tasks.push(...activeTasks);
+			popup.classList.add('hidden');
+			update(tasks);
+		}
+	})
 }
 
 function update(tasks) {
