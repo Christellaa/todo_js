@@ -22,5 +22,9 @@
     "babel-jest": "^30.0.2",
     "jest": "^30.0.2",
     "jest-environment-jsdom": "^30.0.2"
+  },
+  "jest": {
+    "setupFiles": ["./tests/utils/setup.js"],
+    "testEnvironement": "jsdom"
   }
 }

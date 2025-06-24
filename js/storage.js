@@ -55,8 +55,8 @@ export function loadHistory() {
 			typeof action.id === 'string' &&
 			typeof action.text === 'string' &&
 			typeof action.completed === 'boolean' &&
-			typeof action.idx === 'string' &&
-			typeof action.oldIdx === 'string'
+			typeof action.idx === 'number' &&
+			typeof action.oldIdx === 'number' || action.oldIdx === null
 		);
 		if (validHistory.length !== data.length)
 		{

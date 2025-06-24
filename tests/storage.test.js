@@ -1,3 +1,4 @@
+import { mockLocalStorage } from './utils/setup.js';
 import { saveTasks, loadTasks, saveHistory, loadHistory } from '../js/storage.js';
 
 // describe = regrouper tests liés ensemble
@@ -7,28 +8,8 @@ import { saveTasks, loadTasks, saveHistory, loadHistory } from '../js/storage.js
 // toEqual = compare 2 objets/tableaux
 // toBe = comparer 2 valeurs primitives
 
-const localStorageMock = (() => {
-	let storage = {};
-	return {
-		getItem(key) {
-			return storage[key] || null;
-		},
-		setItem(key, value) {
-			storage[key] = value.toString();
-		},
-		removeItem(key) {
-			delete storage[key];
-		},
-		clear() {
-			storage = {};
-		}
-	};
-})(); // () = auto exec
-
-console.log(localStorageMock);
-
-Object.defineProperty(global, 'localStorage', {
-	value: localStorageMock,
+beforeAll(() => {
+  mockLocalStorage();
 });
 
 describe('localStorage task functions save and load', () => {

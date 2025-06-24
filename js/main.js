@@ -21,7 +21,6 @@ launchTodo();
 
 /**
  * HARD:
- * add tests with jest
  * sync with cloud (with api or firebase): to save tasks to it instead of localstorage
  * multi-list: differents lists => work, groceries...
  * user accounts & authentication (need backend): login/register, sync tasks per user
